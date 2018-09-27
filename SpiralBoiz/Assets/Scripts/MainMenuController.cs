@@ -125,6 +125,6 @@ public class MainMenuController : MonoBehaviour
         }
 
         playerconnected[player] = ready;
-        JoinText[player].SetActive(ready);
+        JoinText[player].SetActive(!ready);
     }
 }
