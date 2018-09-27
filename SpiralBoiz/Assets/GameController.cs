@@ -16,5 +16,27 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	}
+	    
+    }
+
+    public void ChangeScene(int scene_index)
+    {
+        switch (scene_index)
+        {
+            case 0:
+                Debug.Log("Main Menu Called");
+                break;
+            case 1:
+                Debug.Log("Start Game Called");
+                break;
+            case 2:
+                Debug.Log("Settings Menu Called");
+                break;
+        }
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+    }
 }
