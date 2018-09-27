@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -21,22 +22,12 @@ public class GameController : MonoBehaviour
 
     public void ChangeScene(int scene_index)
     {
-        switch (scene_index)
-        {
-            case 0:
-                Debug.Log("Main Menu Called");
-                break;
-            case 1:
-                Debug.Log("Start Game Called");
-                break;
-            case 2:
-                Debug.Log("Settings Menu Called");
-                break;
-        }
+        SceneManager.LoadScene(scene_index);
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quit");
+        //Debug.Log("Quit");
+        Application.Quit();
     }
 }
