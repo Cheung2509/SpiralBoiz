@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
 
     private float rotationInDegrees;
 
+    private float yBoundary = 10.0f;
+    private float xBoundary = 4.5f;
+
     private Rigidbody2D rb2d;
 
     private Sprite sprite;
@@ -20,7 +23,6 @@ public class Player : MonoBehaviour
         sprite = GetComponent<Sprite>();
 
         rotationInDegrees = transform.rotation.eulerAngles.z;
-
     }
 	
 	// Update is called once per frame
@@ -29,15 +31,15 @@ public class Player : MonoBehaviour
         rotate();
 
         Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
-       
-        rb2d.AddForce(force);
 
+        rb2d.AddForce(force);
 	}
 
 
     private void rotate()
     {
-
         transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * rotationSpeed));
     }
+
+    //done
 }
