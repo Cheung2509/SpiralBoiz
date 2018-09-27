@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     {
         rotate();
 
-        Vector2 force = new Vector2(Input.GetAxis("Vertical") * transform.right.x * speed, 0);
-
+        Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
+       
         rb2d.AddForce(force);
 
 	}
@@ -37,12 +37,7 @@ public class Player : MonoBehaviour
 
     private void rotate()
     {
-        Quaternion rot = transform.rotation;
 
-        rotationInDegrees = Input.GetAxis("Horizontal") * rotationSpeed;
-
-        float newRotation = transform.rotation.z + rotationInDegrees;
-
-        transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y, newRotation));
+        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * rotationSpeed));
     }
 }
