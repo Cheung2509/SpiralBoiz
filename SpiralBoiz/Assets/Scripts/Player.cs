@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
         sprite = GetComponent<Sprite>();
 
         rotationInDegrees = transform.rotation.eulerAngles.z;
-
     }
 	
 	// Update is called once per frame
@@ -41,4 +40,6 @@ public class Player : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * rotationSpeed));
     }
+
+    //done
 }
