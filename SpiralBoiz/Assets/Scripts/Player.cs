@@ -30,54 +30,54 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetButtonDown("A_Player1"))
+        if (Input.GetButtonDown("A_Player" + player_no))
         {
-            //Debug.Log("Player1 A");
+            Debug.Log("Player" + player_no + "A");
+
+            Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
+
+            rb2d.AddForce(force);
         }
 
-        if (Input.GetButtonDown("A_Player2"))
-        {
 
-            //Debug.Log("Player2 A");
+        if (Input.GetButtonDown("B_Player" + player_no))
+        {
+            Debug.Log("Player" + player_no +" B");
         }
 
-
-        if (Input.GetButtonDown("B_Player1"))
-        {
-            //Debug.Log("Player1 B");
-        }
-
-        if (Input.GetButtonDown("B_Player2"))
-        {
-            //Debug.Log("Player2 B");
-        }
 
 
         //UP DOWN JOYSTICK
-        if (Input.GetAxis("Vertical_Player1") > 0)
+        if (Input.GetAxis("Vertical_Player" + player_no) > 0)
         {
-            //Debug.Log("Player1 Down");
+            Debug.Log("Player" + player_no + "Down");
 
         }
-        if (Input.GetAxis("Vertical_Player1") < 0)
+        if (Input.GetAxis("Vertical_Player" + player_no) < 0)
         {
-            //Debug.Log("Player1 Up");
+            Debug.Log("Player" + player_no + "Up");
         }
 
-        if (Input.GetAxis("Vertical_Player2") > 0)
+
+        //LEFT RIGHT JOYSTICK
+        if (Input.GetAxis("Horizontal_Player" + player_no) > 0)
         {
-            //Debug.Log("Player2 Down");
+            Debug.Log("Player" + player_no + "Right");
+
+            rotate();
+
         }
-        if (Input.GetAxis("Vertical_Player2") < 0)
+        if (Input.GetAxis("Horizontal_Player" + player_no) < 0)
         {
-            //Debug.Log("Player2 Up");
+            Debug.Log("Player" + player_no + "Left");
+
+            rotate();
         }
 
-        rotate();
 
-        Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
+        //rotate();
 
-        rb2d.AddForce(force);
+        
 	}
 
 
