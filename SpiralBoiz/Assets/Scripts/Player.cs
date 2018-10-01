@@ -30,21 +30,35 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //BUTTONS
         if (Input.GetButtonDown("A_Player" + player_no))
         {
             Debug.Log("Player" + player_no + "A");
 
-            Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
-
-            rb2d.AddForce(force);
         }
-
 
         if (Input.GetButtonDown("B_Player" + player_no))
         {
-            Debug.Log("Player" + player_no +" B");
+            Debug.Log("Player" + player_no + " B");
         }
 
+
+        //LEFT AND RIGHT TRIGGERS
+        if (Input.GetAxis("L_Trigger_Player" + player_no) > 0)
+        {
+            Vector2 force = (transform.right * speed)/2;
+
+
+            rb2d.AddForce(-force);
+        }
+        if (Input.GetAxis("R_Trigger_Player" + player_no) > 0)
+        {
+            Vector2 force = transform.right * speed;
+
+            Debug.Log("Player no :" + player_no);
+
+            rb2d.AddForce(force);
+        }
 
 
         //UP DOWN JOYSTICK
@@ -64,26 +78,26 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player" + player_no + "Right");
 
-            rotate();
+            Rotate();
 
         }
         if (Input.GetAxis("Horizontal_Player" + player_no) < 0)
         {
             Debug.Log("Player" + player_no + "Left");
 
-            rotate();
+            Rotate();
         }
 
 
-        //rotate();
+        //Rotate();
 
         
 	}
 
-
-    private void rotate()
+        
+    private void Rotate()
     {
-        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * rotationSpeed));
+        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal_Player" + player_no) * rotationSpeed));
     }
 
     //done
