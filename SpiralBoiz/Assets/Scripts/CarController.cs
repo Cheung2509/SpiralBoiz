@@ -8,6 +8,8 @@ public class CarController : MonoBehaviour
     float torqueForce = -200f;
     float minimumRotationSpeed = 5;
 
+    public int player_no;
+
 	void Start ()
     {
 		
@@ -24,19 +26,21 @@ public class CarController : MonoBehaviour
 
         rb.velocity = ForwardVelocity();
 
-        if (Input.GetButton("Accelerate"))
+        //if (Input.GetButton("Accelerate"))
+        if (Input.GetAxis("R_Trigger_Player" + player_no) > 0)
         {
             rb.AddForce(transform.right * speedForce);
         }
 
-        if(Input.GetButton("Brake"))
-        {
+        //if(Input.GetButton("Brake"))
+        if (Input.GetAxis("L_Trigger_Player" + player_no) > 0)
+            {
             rb.AddForce(transform.right * -speedForce * 2);
         }
 
         float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
 
-        rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+        rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
     }
 
     Vector2 ForwardVelocity()
