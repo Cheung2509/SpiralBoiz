@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
@@ -40,14 +38,21 @@ public class CarController : MonoBehaviour
 
         float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
 
-        rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+        if (transform.InverseTransformDirection(rb.velocity).x > 0)
+        {
+            rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+        }
+        else if (transform.InverseTransformDirection(rb.velocity).x < 0)
+        {
+            rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
+        }
     }
 
     Vector2 ForwardVelocity()
     {
         return transform.right * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.right);
     }
-
+    
     Vector2 SideVelocity()
     {
         return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
