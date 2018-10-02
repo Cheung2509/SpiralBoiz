@@ -30,60 +30,74 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetButtonDown("A_Player1"))
+        //BUTTONS
+        if (Input.GetButtonDown("A_Player" + player_no))
         {
-            //Debug.Log("Player1 A");
+            Debug.Log("Player" + player_no + "A");
+
         }
 
-        if (Input.GetButtonDown("A_Player2"))
+        if (Input.GetButtonDown("B_Player" + player_no))
         {
-
-            //Debug.Log("Player2 A");
+            Debug.Log("Player" + player_no + " B");
         }
 
 
-        if (Input.GetButtonDown("B_Player1"))
+        //LEFT AND RIGHT TRIGGERS
+        if (Input.GetAxis("L_Trigger_Player" + player_no) > 0)
         {
-            //Debug.Log("Player1 B");
-        }
+            Vector2 force = (transform.right * speed)/2;
 
-        if (Input.GetButtonDown("B_Player2"))
+
+            rb2d.AddForce(-force);
+        }
+        if (Input.GetAxis("R_Trigger_Player" + player_no) > 0)
         {
-            //Debug.Log("Player2 B");
+            Vector2 force = transform.right * speed;
+
+            Debug.Log("Player no :" + player_no);
+
+            rb2d.AddForce(force);
         }
 
 
         //UP DOWN JOYSTICK
-        if (Input.GetAxis("Vertical_Player1") > 0)
+        if (Input.GetAxis("Vertical_Player" + player_no) > 0)
         {
-            //Debug.Log("Player1 Down");
+            Debug.Log("Player" + player_no + "Down");
 
         }
-        if (Input.GetAxis("Vertical_Player1") < 0)
+        if (Input.GetAxis("Vertical_Player" + player_no) < 0)
         {
-            //Debug.Log("Player1 Up");
+            Debug.Log("Player" + player_no + "Up");
         }
 
-        if (Input.GetAxis("Vertical_Player2") > 0)
+
+        //LEFT RIGHT JOYSTICK
+        if (Input.GetAxis("Horizontal_Player" + player_no) > 0)
         {
-            //Debug.Log("Player2 Down");
+            Debug.Log("Player" + player_no + "Right");
+
+            Rotate();
+
         }
-        if (Input.GetAxis("Vertical_Player2") < 0)
+        if (Input.GetAxis("Horizontal_Player" + player_no) < 0)
         {
-            //Debug.Log("Player2 Up");
+            Debug.Log("Player" + player_no + "Left");
+
+            Rotate();
         }
 
-        rotate();
 
-        Vector2 force = transform.right * Input.GetAxis("Vertical") * speed;
+        //Rotate();
 
-        rb2d.AddForce(force);
+        
 	}
 
-
-    private void rotate()
+        
+    private void Rotate()
     {
-        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * rotationSpeed));
+        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal_Player" + player_no) * rotationSpeed));
     }
 
     //done
