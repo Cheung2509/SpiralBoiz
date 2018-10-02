@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    public int goalID;
-
     BoxCollider2D boxCollider;
+
+    private int count = 0;
+    public Text scoreText;
 
 	// Use this for initialization
 	void Start ()
@@ -17,7 +19,7 @@ public class Goal : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    
+        scoreText.text = count.ToString();
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +28,7 @@ public class Goal : MonoBehaviour
         {
             //Increment score here
             Debug.Log("GOAL!!!!!");
+            count++;
         }
     }
 }
