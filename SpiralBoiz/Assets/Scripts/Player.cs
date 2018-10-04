@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         //LEFT AND RIGHT TRIGGERS
         if (Input.GetAxis("L_Trigger_Player" + player_no) > 0)
         {
-            Vector2 force = (transform.right * speed)/2;
+            Vector2 force = (transform.right * speed)/3;
 
 
             rb2d.AddForce(-force);
