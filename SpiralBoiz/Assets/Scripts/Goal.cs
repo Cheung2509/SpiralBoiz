@@ -52,6 +52,8 @@ public class Goal : MonoBehaviour
             //stops it colliding with player after goal scored
             collision.GetComponent<CircleCollider2D>().isTrigger = true;
 
+            Camera.main.gameObject.GetComponent<ScreenShake>().CameraShake(0.4f);
+
             StartCoroutine(GoalScored(collision.gameObject));
 
             count++;
