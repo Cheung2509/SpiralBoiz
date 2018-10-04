@@ -6,51 +6,66 @@ public class CarController : MonoBehaviour
     float torqueForce = -200f;
     float minimumRotationSpeed = 5;
 
+    private Vector3 original_position;
+    private Quaternion original_rotation;
+
+    public bool no_input = true;
+
     public int player_no;
 
 	void Start ()
-    {
-		
-	}
-	
-	void Update ()
-    {
-		
+	{
+	    original_position = gameObject.transform.position;
+	    original_rotation = gameObject.transform.rotation;
 	}
 
     void FixedUpdate()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-        rb.velocity = ForwardVelocity();
-
-        //if (Input.GetButton("Accelerate"))
-        if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
+        if (!no_input)
         {
-            rb.AddForce(transform.right * speedForce);
-        }
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        //if(Input.GetButton("Brake"))
-        if (Input.GetAxis("L_Trigger_Player" + player_no) > 0 || Input.GetButton("Brake"))
-        {
-            rb.AddForce(transform.right * -speedForce/2);
-        }
+            rb.velocity = ForwardVelocity();
 
-        float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
+            //if (Input.GetButton("Accelerate"))
+            if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
+            {
+                rb.AddForce(transform.right * speedForce);
+            }
 
-        if (transform.InverseTransformDirection(rb.velocity).x > 0)
-        {
-            rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+            //if(Input.GetButton("Brake"))
+            if (Input.GetAxis("L_Trigger_Player" + player_no) > 0 || Input.GetButton("Brake"))
+            {
+                rb.AddForce(transform.right * -speedForce / 2);
+            }
 
+            float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
+
+            if (transform.InverseTransformDirection(rb.velocity).x > 0)
+            {
+                rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+
+            }
+            else if (transform.InverseTransformDirection(rb.velocity).x < 0)
+            {
+                rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
+            }
+
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+            }
         }
-        else if (transform.InverseTransformDirection(rb.velocity).x < 0)
-        {
-            rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
-        }
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
-        }
+    }
+
+    public void ResetCar()
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().angularVelocity = 0;
+        transform.position = original_position;
+        transform.rotation = original_rotation;
+
+        no_input = true;
     }
 
     Vector2 ForwardVelocity()
@@ -62,5 +77,4 @@ public class CarController : MonoBehaviour
     {
         return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
     }
-
 }

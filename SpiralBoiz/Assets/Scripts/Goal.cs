@@ -8,7 +8,7 @@ public class Goal : MonoBehaviour
 {
     BoxCollider2D boxCollider;
 
-    private int count = 0;
+    public int count = 0;
     public Text scoreText;
     public Text hasScoredText;
 
@@ -17,6 +17,8 @@ public class Goal : MonoBehaviour
 
     [SerializeField]
     private Color ball_explosion_colour;
+
+    public GameObject SceneController;
 
     private float reset_time = 3.0f;
 
@@ -47,6 +49,7 @@ public class Goal : MonoBehaviour
             collision.GetComponent<ParticleSystem>().Play();
 
             collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            collision.GetComponent<Rigidbody2D>().angularVelocity = 0;
             collision.GetComponent<SpriteRenderer>().color = Color.clear;
 
             //stops it colliding with player after goal scored
@@ -65,11 +68,20 @@ public class Goal : MonoBehaviour
         hasScoredText.text = scored_colour_name + " HAS SCORED";
         hasScoredText.color = ball_explosion_colour;
 
+        SceneController.GetComponent<GameSceneController>().game_playing = false;
+
         yield return new WaitForSeconds(reset_time);
         hasScoredText.color = Color.clear;
 
         ball.transform.position = Vector3.zero;
         ball.GetComponent<SpriteRenderer>().color = Color.white;
         ball.GetComponent<CircleCollider2D>().isTrigger = false;
+
+        foreach (GameObject car in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            car.GetComponent<CarController>().ResetCar();
+        }
+
+        StartCoroutine(SceneController.GetComponent<GameSceneController>().CountdownToStart());
     }
 }
