@@ -623,16 +623,16 @@ GameObject:
   m_Component:
   - component: {fileID: 679978556}
   - component: {fileID: 679978555}
-  - component: {fileID: 679978554}
   - component: {fileID: 679978553}
   - component: {fileID: 679978552}
+  - component: {fileID: 679978554}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &679978552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -686,11 +686,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 679978551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4854869dadc170f4eb2ffcc8a320f3ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 952faac2424981040bb3f27a9ce91919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 6
   player_no: 2
 --- !u!212 &679978555
 SpriteRenderer:
@@ -1028,6 +1026,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1152976718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1717197079887640, guid: baa710d2c30e6c34d9d20d7718c30999,
+    type: 2}
+  m_PrefabInternal: {fileID: 1287968906}
+--- !u!114 &1152976719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1152976718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952faac2424981040bb3f27a9ce91919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_no: 1
 --- !u!1 &1198635194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1258,34 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 212286605247035718, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212286605247035718, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.37465727
+      objectReference: {fileID: 0}
+    - target: {fileID: 212286605247035718, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114472480315986614, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
+    - {fileID: 114362509633458334, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1287968907 stripped
