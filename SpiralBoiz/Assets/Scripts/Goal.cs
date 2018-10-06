@@ -12,6 +12,8 @@ public class Goal : MonoBehaviour
     public Text scoreText;
     public Text hasScoredText;
 
+    public float explosionPower;
+
     [SerializeField]
     private String scored_colour_name;
 
@@ -58,6 +60,11 @@ public class Goal : MonoBehaviour
             Camera.main.gameObject.GetComponent<ScreenShake>().CameraShake(0.4f);
 
             StartCoroutine(GoalScored(collision.gameObject));
+
+            foreach (GameObject car in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                car.GetComponent<CarController>().Explode(explosionPower, collision.transform.position);
+            }
 
             count++;
         }

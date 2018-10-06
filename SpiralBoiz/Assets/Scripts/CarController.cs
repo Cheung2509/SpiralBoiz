@@ -8,6 +8,7 @@ public class CarController : MonoBehaviour
 
     private Vector3 original_position;
     private Quaternion original_rotation;
+    private Rigidbody2D rb2d;
 
     public bool no_input = true;
 
@@ -17,43 +18,42 @@ public class CarController : MonoBehaviour
 	{
 	    original_position = gameObject.transform.position;
 	    original_rotation = gameObject.transform.rotation;
-	}
+        rb2d = GetComponent<Rigidbody2D>();
+    }
 
     void FixedUpdate()
     {
         if (!no_input)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-            rb.velocity = ForwardVelocity();
+            rb2d.velocity = ForwardVelocity();
 
             //if (Input.GetButton("Accelerate"))
             if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
             {
-                rb.AddForce(transform.right * speedForce);
+                rb2d.AddForce(transform.right * speedForce);
             }
 
             //if(Input.GetButton("Brake"))
             if (Input.GetAxis("L_Trigger_Player" + player_no) > 0 || Input.GetButton("Brake"))
             {
-                rb.AddForce(transform.right * -speedForce / 2);
+                rb2d.AddForce(transform.right * -speedForce / 2);
             }
 
-            float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
+            float tf = Mathf.Lerp(0, torqueForce, rb2d.velocity.magnitude / minimumRotationSpeed);
 
-            if (transform.InverseTransformDirection(rb.velocity).x > 0)
+            if (transform.InverseTransformDirection(rb2d.velocity).x > 0)
             {
-                rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+                rb2d.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
 
             }
-            else if (transform.InverseTransformDirection(rb.velocity).x < 0)
+            else if (transform.InverseTransformDirection(rb2d.velocity).x < 0)
             {
-                rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
+                rb2d.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
             }
 
             if (Input.GetAxis("Horizontal") != 0)
             {
-                rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+                rb2d.angularVelocity = Input.GetAxis("Horizontal") * tf;
             }
         }
     }
@@ -76,5 +76,14 @@ public class CarController : MonoBehaviour
     Vector2 SideVelocity()
     {
         return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
+    }
+
+    public void Explode(float power, Vector3 explosionPos)
+    {
+        Debug.Log("The Ball Explodeded!!!!!");
+        Vector2 dir = transform.position - explosionPos;
+
+        rb2d.velocity = Vector2.zero;
+        rb2d.AddForceAtPosition(dir.normalized * power, explosionPos, ForceMode2D.Impulse);
     }
 }
