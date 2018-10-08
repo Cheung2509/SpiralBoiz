@@ -1280,6 +1280,16 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 114719217831421598, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: deceleration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719217831421598, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: minimumRotationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
   m_IsPrefabAsset: 0
@@ -6825,7 +6835,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1717197079887640, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
         type: 2}

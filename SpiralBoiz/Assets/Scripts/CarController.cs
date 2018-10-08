@@ -3,15 +3,19 @@ using UnityEngine.Experimental.LowLevel;
 
 public class CarController : MonoBehaviour
 {
-    float speedForce = 7f;
-    float torqueForce = -200f;
-    float minimumRotationSpeed = 2;
+    public float speedForce = 5.0f;
+    float torqueForce = -200.0f;
+    public float minimumRotationSpeed = 2.0f;
+
+    public float deceleration = 0.05f;
 
     private Vector3 original_position;
     private Quaternion original_rotation;
-    private Rigidbody2D rb2d;
+    private Rigidbody2D rb;
 
     public bool no_input = true;
+
+    private bool inputting = false;
 
     public int player_no;
 
@@ -19,13 +23,11 @@ public class CarController : MonoBehaviour
 	{
 	    original_position = gameObject.transform.position;
 	    original_rotation = gameObject.transform.rotation;
-        rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
-    {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        
+    {        
         if (!no_input)
         {
             rb.velocity = ForwardVelocity();
@@ -42,34 +44,71 @@ public class CarController : MonoBehaviour
                 rb.AddForce(transform.right * -((Input.GetAxis("L_Trigger_Player" + player_no) * speedForce)) / 2);
             }
 
-            float tf = Mathf.Lerp(0, torqueForce, rb2d.velocity.magnitude / minimumRotationSpeed);
+            float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
 
-            //if going forward
-            if (transform.InverseTransformDirection(rb.velocity).x > 0)
+            // car rotation
+            // if above minimum speed for turning
+            if (rb.velocity.magnitude > minimumRotationSpeed)
             {
-                rb2d.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
-
-                foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+                //if going forward
+                if (transform.InverseTransformDirection(rb.velocity).x > 0)
                 {
-                    trail.emitting = true;
+                    // turn car
+                    rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+
+                    // add pizzazz
+                    foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+                    {
+                        trail.emitting = true;
+                    }
+                }
+                //if going backwards
+                else if (transform.InverseTransformDirection(rb.velocity).x < 0)
+                {
+                    // turn with inverted control (for people whio dont use inverted controls)
+                    rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
+
+                    // add pizzazz
+                    foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+                    {
+                        trail.emitting = false;
+                    }
                 }
             }
-            //if going backwards
-            else if (transform.InverseTransformDirection(rb.velocity).x < 0)
+            else
             {
-                rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
-                foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
-                {
-                    trail.emitting = false;
-                }
+                // if under minimum speed, stop turning altogether
+                rb.angularVelocity = 0.0f;
             }
 
+            // stupid keyboard turning controls
             if (Input.GetAxis("Horizontal") != 0)
             {
-                rb2d.angularVelocity = Input.GetAxis("Horizontal") * tf;
+                rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+            }
+
+            // linear drag
+            // if no triggers are held
+            if (!IsATriggerPressed())
+            {
+                // slow linear motion
+                rb.velocity = Vector2.MoveTowards(rb.velocity, Vector2.zero, deceleration);
             }
 
             rb.angularVelocity *= 1.5f;
+        }
+    }
+
+    private bool IsATriggerPressed()
+    {
+        if (Input.GetAxis("R_Trigger_Player" + player_no) == 0 && !Input.GetButton("Accelerate") &&
+            Input.GetAxis("L_Trigger_Player" + player_no) == 0 && !Input.GetButton("Brake"))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
@@ -97,7 +136,7 @@ public class CarController : MonoBehaviour
     {
         Vector2 dir = transform.position - explosionPos;
 
-        rb2d.velocity = Vector2.zero;
-        rb2d.AddForceAtPosition(dir.normalized * power, explosionPos, ForceMode2D.Impulse);
+        rb.velocity = Vector2.zero;
+        rb.AddForceAtPosition(dir.normalized * power, explosionPos, ForceMode2D.Impulse);
     }
 }
