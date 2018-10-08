@@ -1991,7 +1991,9 @@ MonoBehaviour:
   - {fileID: 1362985729}
   JoinText:
   - {fileID: 1129455892}
+  - {fileID: 226890145}
   - {fileID: 1008343677}
+  - {fileID: 601960051}
 --- !u!1 &1474429731
 GameObject:
   m_ObjectHideFlags: 0
