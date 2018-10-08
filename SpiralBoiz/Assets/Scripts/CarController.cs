@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.LowLevel;
 
 public class CarController : MonoBehaviour
 {
@@ -21,10 +22,10 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        
         if (!no_input)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
             rb.velocity = ForwardVelocity();
 
             //if (Input.GetButton("Accelerate"))
@@ -41,14 +42,24 @@ public class CarController : MonoBehaviour
 
             float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
 
+            //if going forward
             if (transform.InverseTransformDirection(rb.velocity).x > 0)
             {
                 rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
 
+                foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+                {
+                    trail.emitting = true;
+                }
             }
+            //if going backwards
             else if (transform.InverseTransformDirection(rb.velocity).x < 0)
             {
                 rb.angularVelocity = -(Input.GetAxis("Horizontal_Player" + player_no) * tf);
+                foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+                {
+                    trail.emitting = false;
+                }
             }
 
             if (Input.GetAxis("Horizontal") != 0)
