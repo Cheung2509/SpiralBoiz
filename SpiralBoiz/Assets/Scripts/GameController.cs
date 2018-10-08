@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private int no_players = 0;
+    public int no_players = 0;
 
 
 	// Use this for initialization

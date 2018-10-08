@@ -25,7 +25,6 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        MenuSceneButtons[selected_option].GetComponent<Image>().color = Color.red;
         for (int i = 0; i < max_players; i++)
         {
             playerconnected.Add(false);
@@ -41,6 +40,18 @@ public class MainMenuController : MonoBehaviour
             //Debug.Log("Player1 A");
             if (playerconnected[0] == true)
             {
+                int no_players = 0;
+                foreach (bool player in playerconnected)
+                {
+                    if (player == true)
+                    {
+                        no_players++;
+                        Debug.Log(no_players);
+                    }
+
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().no_players =
+                        no_players;
+                }
                 MenuSceneButtons[selected_option].GetComponent<Button>().onClick.Invoke();
             }
             else
@@ -117,11 +128,12 @@ public class MainMenuController : MonoBehaviour
     {
         if (ready)
         {
-            Players[player].GetComponent<Image>().color = Color.white;
+            Players[player].GetComponent<Image>().color += new Color(0, 0, 0, 1);
+            MenuSceneButtons[selected_option].GetComponent<Image>().color = Color.red;
         }
         else
         {
-            Players[player].GetComponent<Image>().color = Color.clear;
+            Players[player].GetComponent<Image>().color -= new Color(0, 0, 0, 1);
         }
 
         playerconnected[player] = ready;
