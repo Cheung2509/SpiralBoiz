@@ -40,7 +40,7 @@ public class GameSceneController : MonoBehaviour
 
                 temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
 
-                if (i > 1)
+                if (i == 1 || i == 3)
                 {
                     temp.GetComponent<SpriteRenderer>().color = Color.blue;
                 }
@@ -56,7 +56,7 @@ public class GameSceneController : MonoBehaviour
 
                 temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
 
-                if (i > 1)
+                if (i == 1 || i == 3)
                 {
                     temp.GetComponent<SpriteRenderer>().color = Color.blue;
                 }

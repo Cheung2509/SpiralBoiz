@@ -40,12 +40,13 @@ public class MainMenuController : MonoBehaviour
             //Debug.Log("Player1 A");
             if (playerconnected[0] == true)
             {
+                int no_players = 0;
                 foreach (bool player in playerconnected)
                 {
-                    int no_players = 0;
                     if (player == true)
                     {
                         no_players++;
+                        Debug.Log(no_players);
                     }
 
                     GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().no_players =
