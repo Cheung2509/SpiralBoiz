@@ -9,6 +9,7 @@ public class CarController : MonoBehaviour
 
     private Vector3 original_position;
     private Quaternion original_rotation;
+    private Rigidbody2D rb2d;
 
     public bool no_input = true;
 
@@ -18,7 +19,8 @@ public class CarController : MonoBehaviour
 	{
 	    original_position = gameObject.transform.position;
 	    original_rotation = gameObject.transform.rotation;
-	}
+        rb2d = GetComponent<Rigidbody2D>();
+    }
 
     void FixedUpdate()
     {
@@ -40,12 +42,12 @@ public class CarController : MonoBehaviour
                 rb.AddForce(transform.right * -((Input.GetAxis("L_Trigger_Player" + player_no) * speedForce)) / 2);
             }
 
-            float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);
+            float tf = Mathf.Lerp(0, torqueForce, rb2d.velocity.magnitude / minimumRotationSpeed);
 
             //if going forward
             if (transform.InverseTransformDirection(rb.velocity).x > 0)
             {
-                rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
+                rb2d.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
 
                 foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
                 {
@@ -64,7 +66,7 @@ public class CarController : MonoBehaviour
 
             if (Input.GetAxis("Horizontal") != 0)
             {
-                rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+                rb2d.angularVelocity = Input.GetAxis("Horizontal") * tf;
             }
 
             rb.angularVelocity *= 1.5f;
@@ -91,5 +93,14 @@ public class CarController : MonoBehaviour
     Vector2 SideVelocity()
     {
         return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
+    }
+
+    public void Explode(float power, Vector3 explosionPos)
+    {
+        Debug.Log("The Ball Explodeded!!!!!");
+        Vector2 dir = transform.position - explosionPos;
+
+        rb2d.velocity = Vector2.zero;
+        rb2d.AddForceAtPosition(dir.normalized * power, explosionPos, ForceMode2D.Impulse);
     }
 }

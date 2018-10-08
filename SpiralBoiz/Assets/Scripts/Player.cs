@@ -100,5 +100,11 @@ public class Player : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal_Player" + player_no) * rotationSpeed));
     }
 
+    public void Explode(float radius, float power, Vector3 explosionPos)
+    {
+        Vector2 dir = transform.position - explosionPos;
+
+        rb2d.AddForce(dir.normalized * power, ForceMode2D.Impulse);
+    }
     //done
 }

@@ -1040,6 +1040,16 @@ Prefab:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
   m_IsPrefabAsset: 0
@@ -6582,6 +6592,25 @@ Prefab:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1717197079887640, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719217831421598, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: player_no
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
   m_IsPrefabAsset: 0
@@ -6739,6 +6768,7 @@ MonoBehaviour:
   count: 0
   scoreText: {fileID: 1420701208}
   hasScoredText: {fileID: 2064524244}
+  explosionPower: 3.5
   scored_colour_name: BLUE
   ball_explosion_colour: {r: 0, g: 0.3603778, b: 1, a: 1}
   SceneController: {fileID: 2026677433}
@@ -6886,6 +6916,7 @@ MonoBehaviour:
   count: 0
   scoreText: {fileID: 356717885}
   hasScoredText: {fileID: 2064524244}
+  explosionPower: 3.5
   scored_colour_name: ORANGE
   ball_explosion_colour: {r: 1, g: 0.37465727, b: 0, a: 1}
   SceneController: {fileID: 2026677433}
