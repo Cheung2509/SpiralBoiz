@@ -71,8 +71,6 @@ public class CarController : MonoBehaviour
 
             rb.angularVelocity *= 1.5f;
         }
-
-        Debug.Log(Input.GetAxis("R_Trigger_Player1"));
     }
 
     public void ResetCar()
