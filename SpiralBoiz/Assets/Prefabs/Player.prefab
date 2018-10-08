@@ -146,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.55, y: 0.75}
+  m_Size: {x: 0.75, y: 0.55}
   m_EdgeRadius: 0
 --- !u!96 &96583394038732966
 TrailRenderer:
@@ -343,6 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952faac2424981040bb3f27a9ce91919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedForce: 7
+  minimumRotationSpeed: 0.5
+  deceleration: 0.1
   no_input: 1
   player_no: 1
 --- !u!212 &212286605247035718

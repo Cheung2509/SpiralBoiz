@@ -6835,7 +6835,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1717197079887640, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61988135101944796, guid: baa710d2c30e6c34d9d20d7718c30999,
         type: 2}
@@ -6851,6 +6851,16 @@ Prefab:
         type: 2}
       propertyPath: player_no
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719217831421598, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: minimumRotationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719217831421598, guid: baa710d2c30e6c34d9d20d7718c30999,
+        type: 2}
+      propertyPath: deceleration
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baa710d2c30e6c34d9d20d7718c30999, type: 2}
@@ -6965,7 +6975,6 @@ MonoBehaviour:
   orangeGoal: {fileID: 2037105447}
   blueGoal: {fileID: 2132686267}
   winText: {fileID: 167763419}
-  winButton: {fileID: 168617672}
 --- !u!4 &2026677435
 Transform:
   m_ObjectHideFlags: 0
