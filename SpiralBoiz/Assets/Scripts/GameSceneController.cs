@@ -17,9 +17,6 @@ public class GameSceneController : MonoBehaviour
     public GameObject blueGoal;
 
     public Text winText;
-    public GameObject winButton;
-
-    private bool game_over = true;
 
     void Start()
     {
@@ -45,14 +42,6 @@ public class GameSceneController : MonoBehaviour
 	        countdown_time -= Time.deltaTime;
 	        countdown_text.text = Mathf.RoundToInt(countdown_time).ToString();
         }
-
-	    if (game_over)
-	    {
-	        if (Input.GetButtonDown("A_Player1"))
-	        {
-                winButton.GetComponent<BackToMenuButton>().ButtonPressed();
-	        }
-	    }
 	}
 
     public IEnumerator CountdownToStart()
@@ -73,13 +62,6 @@ public class GameSceneController : MonoBehaviour
 
     void EndGame()
     {
-        game_over = true;
-        foreach (GameObject car in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            car.GetComponent<CarController>().no_input = true;
-        }
-        GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
         if (orangeGoal.GetComponent<Goal>().count > blueGoal.GetComponent<Goal>().count)
         {
             winText.color = new Color(1.0f, 0.5f, 0);
@@ -96,10 +78,5 @@ public class GameSceneController : MonoBehaviour
         {
             //draw
         }
-
-        winButton.SetActive(true);
-
-
-        Debug.Log("Game Ogre");
     }
 }

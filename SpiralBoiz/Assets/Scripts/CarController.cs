@@ -95,7 +95,6 @@ public class CarController : MonoBehaviour
 
     public void Explode(float power, Vector3 explosionPos)
     {
-        Debug.Log("The Ball Explodeded!!!!!");
         Vector2 dir = transform.position - explosionPos;
 
         rb2d.velocity = Vector2.zero;

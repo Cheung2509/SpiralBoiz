@@ -41,7 +41,6 @@ public class Goal : MonoBehaviour
         if (collision.tag == "Ball")
         {
             //Increment score here
-            Debug.Log("GOAL!!!!!");
 
             //Goal explosion
             ParticleSystem ball_ps = collision.GetComponent<ParticleSystem>();
@@ -72,7 +71,7 @@ public class Goal : MonoBehaviour
 
     IEnumerator GoalScored(GameObject ball)
     {
-        hasScoredText.text = scored_colour_name + " HAS SCORED";
+        hasScoredText.text = scored_colour_name + " HAS SCORED!";
         hasScoredText.color = ball_explosion_colour;
 
         SceneController.GetComponent<GameSceneController>().game_playing = false;
