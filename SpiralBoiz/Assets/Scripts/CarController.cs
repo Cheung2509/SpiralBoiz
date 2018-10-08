@@ -4,6 +4,7 @@ using UnityEngine.Experimental.LowLevel;
 public class CarController : MonoBehaviour
 {
     public float speedForce = 5.0f;
+    public float maxSpeed = 7.0f;
     float torqueForce = -200.0f;
     public float minimumRotationSpeed = 2.0f;
 
@@ -31,6 +32,8 @@ public class CarController : MonoBehaviour
         if (!no_input)
         {
             rb.velocity = ForwardVelocity();
+
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
 
             //if (Input.GetButton("Accelerate"))
             if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
