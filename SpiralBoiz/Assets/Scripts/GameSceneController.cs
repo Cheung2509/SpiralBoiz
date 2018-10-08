@@ -39,6 +39,10 @@ public class GameSceneController : MonoBehaviour
                 temp.GetComponent<CarController>().player_no = i + 1;
 
                 temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
+                if (temp.transform.rotation.y != 0)
+                {
+                    temp.transform.rotation = new Quaternion(0, 0, temp.transform.rotation.y, 0);
+                }
 
                 if (i == 1 || i == 3)
                 {
@@ -55,6 +59,10 @@ public class GameSceneController : MonoBehaviour
                 temp.GetComponent<CarController>().player_no = i + 1;
 
                 temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
+                if (temp.transform.rotation.y != 0)
+                {
+                    temp.transform.rotation = new Quaternion(0, 0, temp.transform.rotation.y, 0);
+                }
 
                 if (i == 1 || i == 3)
                 {
