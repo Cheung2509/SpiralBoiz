@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameSceneController : MonoBehaviour
 {
+    public GameObject player;
+    public List<GameObject> spawnPoints = new List<GameObject>();
+
     public float time_remaining = 300;
     public Text time_remaining_text;
 
@@ -18,9 +21,46 @@ public class GameSceneController : MonoBehaviour
 
     public Text winText;
 
+    private bool game_over = false;
+
     void Start()
     {
         StartCoroutine(CountdownToStart());
+
+        if (GameObject.FindGameObjectWithTag("GameController") != null)
+        {
+            for (int i = 0;
+                i < GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().no_players;
+                i++)
+            {
+                GameObject temp = Instantiate(player);
+                temp.transform.position = spawnPoints[i].transform.position;
+                temp.GetComponent<CarController>().player_no = i + 1;
+
+                temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
+
+                if (i > 1)
+                {
+                    temp.GetComponent<SpriteRenderer>().color = Color.blue;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject temp = Instantiate(player);
+                temp.transform.position = spawnPoints[i].transform.position;
+                temp.GetComponent<CarController>().player_no = i + 1;
+
+                temp.transform.right = GameObject.FindGameObjectWithTag("Ball").transform.position - temp.transform.position;
+
+                if (i > 1)
+                {
+                    temp.GetComponent<SpriteRenderer>().color = Color.blue;
+                }
+            }
+        }
     }
 
 	// Update is called once per frame
