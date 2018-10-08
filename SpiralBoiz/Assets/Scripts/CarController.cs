@@ -36,12 +36,20 @@ public class CarController : MonoBehaviour
             if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
             {
                 rb.AddForce(transform.right * ((Input.GetAxis("R_Trigger_Player" + player_no) * speedForce)));
+                if (transform.InverseTransformDirection(rb.velocity).x < 0)
+                {
+                    rb.AddForce(transform.right * ((Input.GetAxis("R_Trigger_Player" + player_no) * speedForce * 4)));
+                }
             }
 
             //if(Input.GetButton("Brake"))
             if (Input.GetAxis("L_Trigger_Player" + player_no) > 0 || Input.GetButton("Brake"))
             {
-                rb.AddForce(transform.right * -((Input.GetAxis("L_Trigger_Player" + player_no) * speedForce)) / 2);
+                rb.AddForce(transform.right * -((Input.GetAxis("L_Trigger_Player" + player_no) * speedForce * 0.8f)));
+                if (transform.InverseTransformDirection(rb.velocity).x > 0)
+                {
+                    rb.AddForce(transform.right * -((Input.GetAxis("L_Trigger_Player" + player_no) * speedForce * 3)));
+                }
             }
 
             float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / minimumRotationSpeed);

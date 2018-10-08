@@ -110,17 +110,18 @@ public class MainMenuController : MonoBehaviour
         if (time_since_option_change > 0.2f)
         {
             time_since_option_change = 0;
-            MenuSceneButtons[selected_option].GetComponent<Image>().color = Color.white;
+            MenuSceneButtons[selected_option].GetComponentInChildren<Text>().color = new Color(0.8f, 0.8f, 0.8f);
 
             if (up && selected_option > 0)
             {
                 selected_option--;
             }
-            else if (!up && selected_option < MenuSceneButtons.Count-1)
+            else if (!up && selected_option < MenuSceneButtons.Count - 1)
             {
                 selected_option++;
             }
-            MenuSceneButtons[selected_option].GetComponent<Image>().color = Color.red;
+
+            MenuSceneButtons[selected_option].GetComponentInChildren<Text>().color = Color.blue;
         }
     }
 
@@ -129,7 +130,7 @@ public class MainMenuController : MonoBehaviour
         if (ready)
         {
             Players[player].GetComponent<Image>().color += new Color(0, 0, 0, 1);
-            MenuSceneButtons[selected_option].GetComponent<Image>().color = Color.red;
+            MenuSceneButtons[selected_option].GetComponentInChildren<Text>().color = Color.blue;
         }
         else
         {
