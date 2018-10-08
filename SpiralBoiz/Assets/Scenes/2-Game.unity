@@ -6930,15 +6930,15 @@ MonoBehaviour:
   - {fileID: 51808587}
   - {fileID: 99823304}
   - {fileID: 769138117}
-  time_remaining: 300
+  time_remaining: 10
   time_remaining_text: {fileID: 1977442831}
   countdown_time: 3
   countdown_text: {fileID: 209381787}
   game_playing: 0
-  orangeGoal: {fileID: 2037105447}
-  blueGoal: {fileID: 2132686267}
+  orangeGoal: {fileID: 2132686267}
+  blueGoal: {fileID: 2037105447}
   winText: {fileID: 167763419}
-  winButton: {fileID: 168617672}
+  gameOverMenuButton: {fileID: 168617672}
 --- !u!4 &2026677435
 Transform:
   m_ObjectHideFlags: 0

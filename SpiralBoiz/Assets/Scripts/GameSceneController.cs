@@ -22,6 +22,7 @@ public class GameSceneController : MonoBehaviour
     public Text winText;
 
     private bool game_over = false;
+    public GameObject gameOverMenuButton;
 
     void Start()
     {
@@ -66,6 +67,14 @@ public class GameSceneController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (game_over)
+	    {
+	        if (Input.GetButtonDown("A_Player1"))
+	        {
+	            gameOverMenuButton.GetComponent<Button>().onClick.Invoke();
+	        }
+	    }
+
 	    if (game_playing)
 	    {
 	        time_remaining -= Time.deltaTime;
@@ -102,6 +111,13 @@ public class GameSceneController : MonoBehaviour
 
     void EndGame()
     {
+        game_over = true;
+        foreach (GameObject car in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            car.GetComponent<CarController>().no_input = true;
+        }
+        GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
         if (orangeGoal.GetComponent<Goal>().count > blueGoal.GetComponent<Goal>().count)
         {
             winText.color = new Color(1.0f, 0.5f, 0);
@@ -118,5 +134,6 @@ public class GameSceneController : MonoBehaviour
         {
             //draw
         }
+        gameOverMenuButton.SetActive(true);
     }
 }
