@@ -9,6 +9,13 @@ public class Powerup : MonoBehaviour {
     [SerializeField]
     float reset_time = 3;
 
+    AudioSource pickUpSound;
+
+    private void Start()
+    {
+        pickUpSound = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (collectable == false)
@@ -37,6 +44,7 @@ public class Powerup : MonoBehaviour {
                 collectable = false;
                 gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
                 //this.transform.GetChild(0).gameObject.SetActive(false);
+                pickUpSound.Play(0);
             }
         }
     }
