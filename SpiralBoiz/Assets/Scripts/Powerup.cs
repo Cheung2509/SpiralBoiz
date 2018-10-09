@@ -1,0 +1,40 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Powerup : MonoBehaviour {
+
+    bool collectable = true;
+    float timer;
+    [SerializeField]float reset_time = 3;
+
+    private void Update()
+    {
+        if (collectable == false)
+        {
+            timer += Time.deltaTime;
+
+            if(timer > reset_time)
+            {
+                timer = 0;
+                collectable = true;
+                this.transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D candidate)
+    {
+        if (collectable == true)
+        {
+            if (candidate.gameObject.tag == "Player")
+            {
+                candidate.gameObject.GetComponent<CarController>().addBoostResource(15);
+                collectable = false;
+                this.transform.GetChild(0).gameObject.SetActive(false);
+            }
+        }
+    }
+}

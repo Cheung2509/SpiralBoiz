@@ -8,6 +8,12 @@ public class CarController : MonoBehaviour
     float torqueForce = -200.0f;
     public float minimumRotationSpeed = 2.0f;
 
+    // Boost variables
+    [Range(0, 100)][SerializeField] float boost_resource = 25;
+    int max_boost_resource = 100;
+    [SerializeField] float boost_effect = 5.0f;
+    [SerializeField] float boost_use_rate = 2f;
+
     public float deceleration = 0.05f;
 
     private Vector3 original_position;
@@ -92,6 +98,17 @@ public class CarController : MonoBehaviour
                 rb.angularVelocity = 0.0f;
             }
 
+            // Car Boost
+            if (Input.GetButton("A_Player" + player_no))
+            {
+                if (boost_resource > 0)
+                {
+                    rb.AddForce(rb.velocity.normalized * boost_effect);
+                    boost_resource -= ((boost_use_rate*10) * Time.deltaTime);
+                }
+            }
+
+
             // stupid keyboard turning controls
             if (Input.GetAxis("Horizontal") != 0)
             {
@@ -149,5 +166,15 @@ public class CarController : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         rb.AddForceAtPosition(dir.normalized * power, explosionPos, ForceMode2D.Impulse);
+    }
+
+    public void addBoostResource(int value)
+    {
+        boost_resource += value;
+
+        if(boost_resource > max_boost_resource)
+        {
+            boost_resource = 100;
+        }
     }
 }
