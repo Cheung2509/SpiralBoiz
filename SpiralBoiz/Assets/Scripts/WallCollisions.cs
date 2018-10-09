@@ -17,7 +17,7 @@ public class WallCollisions : MonoBehaviour
         Vector2 reflectedVelocity = Vector2.Reflect(carVelocity, transform.up);
 
         // assign reflected velocity
-        rb.velocity = reflectedVelocity;
+        rb.velocity = reflectedVelocity/2;
 
         // rotate
         Quaternion rotation = Quaternion.FromToRotation(carVelocity, reflectedVelocity);

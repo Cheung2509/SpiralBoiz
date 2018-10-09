@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public float rotationSpeed;
-
     private float rotationInDegrees;
 
     private float yBoundary = 10.0f;
