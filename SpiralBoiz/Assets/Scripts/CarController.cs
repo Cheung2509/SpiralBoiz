@@ -8,11 +8,19 @@ public class CarController : MonoBehaviour
     float torqueForce = -200.0f;
     public float minimumRotationSpeed = 2.0f;
 
+    public GameObject rocketTrail;
+
     // Boost variables
-    [Range(0, 100)][SerializeField] float boost_resource = 25;
+    [Range(0, 100)] public float boost_resource = 25;
     int max_boost_resource = 100;
-    [SerializeField] float boost_effect = 5.0f;
-    [SerializeField] float boost_use_rate = 2f;
+
+    [SerializeField]
+    float boost_effect = 1.0f;
+
+    [SerializeField]
+    float boost_use_rate = 2f;
+
+    private bool boosting = false;
 
     public float deceleration = 0.05f;
 
@@ -39,7 +47,14 @@ public class CarController : MonoBehaviour
         {
             rb.velocity = ForwardVelocity();
 
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
+            if (boosting)
+            {
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed * 2.0f);
+            }
+            else
+            {
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
+            }
 
             //if (Input.GetButton("Accelerate"))
             if (Input.GetAxis("R_Trigger_Player" + player_no) > 0 || Input.GetButton("Accelerate"))
@@ -103,9 +118,20 @@ public class CarController : MonoBehaviour
             {
                 if (boost_resource > 0)
                 {
+                    //rb.AddForce(transform.right * (rb.velocity.normalized * boost_effect));
                     rb.AddForce(rb.velocity.normalized * boost_effect);
                     boost_resource -= ((boost_use_rate*10) * Time.deltaTime);
+
+                    rocketTrail.GetComponent<TrailRenderer>().emitting = true;
                 }
+                else
+                {
+                    rocketTrail.GetComponent<TrailRenderer>().emitting = false;
+                }
+            }
+            else
+            {
+                rocketTrail.GetComponent<TrailRenderer>().emitting = false;
             }
 
 

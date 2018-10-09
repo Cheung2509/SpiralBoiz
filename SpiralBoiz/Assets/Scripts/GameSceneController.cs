@@ -114,6 +114,7 @@ public class GameSceneController : MonoBehaviour
         foreach (GameObject car in GameObject.FindGameObjectsWithTag("Player"))
         {
             car.GetComponent<CarController>().no_input = false;
+            car.GetComponent<CarController>().boost_resource = 25;
         }
     }
 

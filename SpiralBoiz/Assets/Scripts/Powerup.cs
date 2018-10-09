@@ -6,7 +6,8 @@ public class Powerup : MonoBehaviour {
 
     bool collectable = true;
     float timer;
-    [SerializeField]float reset_time = 3;
+    [SerializeField]
+    float reset_time = 3;
 
     private void Update()
     {
@@ -18,14 +19,15 @@ public class Powerup : MonoBehaviour {
             {
                 timer = 0;
                 collectable = true;
-                this.transform.GetChild(0).gameObject.SetActive(true);
+                gameObject.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.5f);
+                //transform.GetChild(0).gameObject.SetActive(true);
             }
         }
 
 
     }
 
-    private void OnTriggerEnter2D(Collider2D candidate)
+    void OnTriggerEnter2D(Collider2D candidate)
     {
         if (collectable == true)
         {
@@ -33,7 +35,8 @@ public class Powerup : MonoBehaviour {
             {
                 candidate.gameObject.GetComponent<CarController>().addBoostResource(15);
                 collectable = false;
-                this.transform.GetChild(0).gameObject.SetActive(false);
+                gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
+                //this.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
