@@ -15,12 +15,19 @@ public class WallCollisions : MonoBehaviour
 
         // reflect velocity
         Vector2 reflectedVelocity = Vector2.Reflect(carVelocity, transform.up);
-
-        // assign reflected velocity
-        rb.velocity = reflectedVelocity/2;
+        if (collider.tag == "Player")
+        {
+            // assign reflected velocity
+            rb.velocity = reflectedVelocity / 4;
+        }
+        else if (collider.tag == "Ball")
+        {
+            // assign reflected velocity
+            rb.velocity = reflectedVelocity / 1.5f;
+        }
 
         // rotate
         Quaternion rotation = Quaternion.FromToRotation(carVelocity, reflectedVelocity);
-        rb.transform.rotation = rotation * rb.transform.rotation;       
+        rb.transform.rotation = rotation * rb.transform.rotation;
     }
 }

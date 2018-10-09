@@ -49,7 +49,7 @@ public class CarController : MonoBehaviour
 
             if (boosting)
             {
-                rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed * 2.0f);
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed * 1.1f);
             }
             else
             {
@@ -123,15 +123,18 @@ public class CarController : MonoBehaviour
                     boost_resource -= ((boost_use_rate*10) * Time.deltaTime);
 
                     rocketTrail.GetComponent<TrailRenderer>().emitting = true;
+                    boosting = true;
                 }
                 else
                 {
                     rocketTrail.GetComponent<TrailRenderer>().emitting = false;
+                    boosting = false;
                 }
             }
             else
             {
                 rocketTrail.GetComponent<TrailRenderer>().emitting = false;
+                boosting = false;
             }
 
 

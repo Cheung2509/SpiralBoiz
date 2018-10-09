@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedForce: 3
-  maxSpeed: 7
+  maxSpeed: 5
   minimumRotationSpeed: 0.5
   rocketTrail: {fileID: 1297876626554258}
   boost_resource: 25
