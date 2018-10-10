@@ -13,6 +13,7 @@ public class Goal : MonoBehaviour
     public Text hasScoredText;
 
     public float explosionPower;
+    AudioSource explosionSound;
 
     [SerializeField]
     private String scored_colour_name;
@@ -28,12 +29,14 @@ public class Goal : MonoBehaviour
 	void Start ()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        explosionSound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         scoreText.text = count.ToString();
+        
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,6 +67,8 @@ public class Goal : MonoBehaviour
             {
                 car.GetComponent<CarController>().Explode(explosionPower, collision.transform.position);
             }
+
+            explosionSound.Play(0);
 
             count++;
         }
