@@ -7,13 +7,14 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     BoxCollider2D boxCollider;
+    public PlayerScoreUpdater player_score_updater;
+    public ScoreAssigner score_assigner;
 
     public int count = 0;
     public Text scoreText;
     public Text hasScoredText;
 
     public float explosionPower;
-    AudioSource explosionSound;
 
     [SerializeField]
     private String scored_colour_name;
@@ -29,20 +30,21 @@ public class Goal : MonoBehaviour
 	void Start ()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        explosionSound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         scoreText.text = count.ToString();
-        
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ball")
         {
+            // Player stats updated
+            player_score_updater.updatePlayerScoreAmount(score_assigner.get_current_player());
+
             //Increment score here
 
             //Goal explosion
@@ -68,8 +70,6 @@ public class Goal : MonoBehaviour
                 car.GetComponent<CarController>().Explode(explosionPower, collision.transform.position);
             }
 
-            explosionSound.Play(0);
-
             count++;
         }
     }
@@ -93,6 +93,9 @@ public class Goal : MonoBehaviour
             car.GetComponent<CarController>().ResetCar();
         }
 
+
         StartCoroutine(SceneController.GetComponent<GameSceneController>().CountdownToStart());
+
+      
     }
 }

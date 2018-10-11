@@ -8,6 +8,9 @@ public class GameSceneController : MonoBehaviour
     public GameObject player;
     public List<GameObject> spawnPoints = new List<GameObject>();
 
+    public PlayerScoreUpdater player_score_updater;
+    bool saved_score;
+
     public float time_remaining = 300;
     public Text time_remaining_text;
 
@@ -77,7 +80,13 @@ public class GameSceneController : MonoBehaviour
 	{
 	    if (game_over)
 	    {
-	        if (Input.GetButtonDown("A_Player1"))
+            if (!saved_score)
+            {
+                player_score_updater.saveNewScoreStats();
+                saved_score = true;
+            }
+
+            if (Input.GetButtonDown("A_Player1"))
 	        {
 	            gameOverMenuButton.GetComponent<Button>().onClick.Invoke();
 	        }
