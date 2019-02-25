@@ -10,6 +10,12 @@ public class CarController : MonoBehaviour
 
     public GameObject rocketTrail;
 
+    public GameObject trail1;
+    public GameObject trail2;
+
+
+    public GameObject PlayerNoUI;
+
     // Boost variables
     [Range(0, 100)] public float boost_resource = 25;
     int max_boost_resource = 100;
@@ -171,6 +177,9 @@ public class CarController : MonoBehaviour
 
     public void ResetCar()
     {
+        trail1.SetActive(false);
+        trail2.SetActive(false);
+
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().angularVelocity = 0;
         transform.position = original_position;
