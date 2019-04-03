@@ -94,7 +94,7 @@ public class CarController : MonoBehaviour
                     // turn car
                     rb.angularVelocity = Input.GetAxis("Horizontal_Player" + player_no) * tf;
 
-                    // add pizzazz
+                    // wheel trails
                     foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
                     {
                         trail.emitting = true;
